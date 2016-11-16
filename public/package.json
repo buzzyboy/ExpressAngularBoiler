@@ -1,0 +1,9 @@
+{
+  "name": "Instafollowr",
+  "version": "0.0.1",
+  "devDependencies": {
+    "angular": "^1.5.8",
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.1.1"
+  }
+}

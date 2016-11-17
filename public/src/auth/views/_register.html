@@ -1,1 +1,14 @@
-This is for registration!
+<div ng-controller="RegisterController as vm">
+    <form name="registerForm" class="form-register" novalidate>
+        <h2 class="form-signin-heading">Register</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input ng-model="vm.registerData.username" type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="" autocomplete="off">
+
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input ng-model="vm.registerData.password" type="password" id="inputPassword" class="form-control" placeholder="Password" required="" autocomplete="off">
+
+        <label for="inputPassword" class="sr-only">Confirm</label>
+        <input ng-model="vm.registerData.passwordConfirm" type="password" id="inputPasswordConfirm" class="form-control" placeholder="Password" required="" autocomplete="off">
+        <button ng-click="vm.register()" ng-disabled="registerForm.$invalid" class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+    </form>
+</div>

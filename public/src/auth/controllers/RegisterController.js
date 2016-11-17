@@ -9,14 +9,20 @@
 		.module('Instafollowr')
 		.controller('RegisterController', RegisterController);
 
-	RegisterController.$inject = ['AuthService'];
+	RegisterController.$inject = ['$scope', 'AuthService'];
 
 	/* @ngInject */
-	function RegisterController (AuthService) {
+	function RegisterController ($scope, AuthService) {
 		/* jshint validthis: true */
 		var vm = this;
 
 		vm.activate = activate;
+		vm.register = register;
+		vm.registerData = {
+			username: "",
+			password: "",
+			passwordConfirm: ""
+		};
 		vm.title = 'RegisterController';
 
 		activate();
@@ -24,6 +30,11 @@
 		////////////////
 
 		function activate () { }
+
+		function register () {
+			var form = $scope.registerForm;
+			console.log(form);
+		}
 	}
 })();
 

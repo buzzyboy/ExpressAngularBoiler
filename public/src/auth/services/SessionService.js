@@ -32,7 +32,7 @@
 		 * @param accessToken
 		 * @returns {{user: {id: string, userName: string, email: string, firstName: string, lastName: string, name: string, avatarUrl: string, phoneNumber: string, phoneNumberConfirmed: boolean}, accessToken: *}|*|null}
 		 */
-		function create(accessToken) {
+		function create (accessToken) {
 		    self.session = {
 		        user: {
 		            id: '',

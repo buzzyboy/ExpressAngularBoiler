@@ -9,10 +9,10 @@
 		.module('Instafollowr')
 		.factory('AuthService', AuthService);
 	
-	AuthService.$inject = ['$http', 'CONFIG'];
+	AuthService.$inject = ['$http', '$q', 'CONFIG'];
 	
 	/* @ngInject */
-	function AuthService ($http, CONFIG) {
+	function AuthService ($http, $q, CONFIG) {
 		var service = {
 			login: login,
 			register: register
@@ -27,19 +27,21 @@
 				username: username,
 				password: password
 			}).then(function (response) {
-				debugger;
+				if (response.data.error)
+				{
+					return $q.reject(response.error);
+				}
 				return response;
-			}, function (error) {
-				debugger;
+			}, function (response) {
+				return response.error;
 			});
 		}
 
 		function register (registerModel) {
 			$http.post(CONFIG.apiServiceBaseUri + 'account/register', registerModel).then(function (response) {
-				debugger;
 				return response;
-			}, function (error) {
-				debugger;
+			}, function (response) {
+				return response.error;
 			});
 		}
 	}

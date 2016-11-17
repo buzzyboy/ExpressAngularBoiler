@@ -23,6 +23,7 @@
 			password: "",
 			passwordConfirm: ""
 		};
+		vm.formError = null;
 		vm.title = 'RegisterController';
 
 		activate();
@@ -33,10 +34,11 @@
 
 		function register () {
 			var form = $scope.registerForm;
+			vm.formError = null;
 			AuthService.register(vm.registerData).then(function (response) {
 
-			}, function (error) {
-
+			}, function (errorMessage) {
+				vm.formError = errorMessage;
 			});
 			console.log(form);
 		}

@@ -9,9 +9,9 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var Account = require('./app/models/Account.js');
-var account = require('./routes/account');
 
-var routes = require('./routes/index');
+var account = require('./app/controllers/account');
+var routes = require('./app/controllers/index');
 
 var app = express();
 

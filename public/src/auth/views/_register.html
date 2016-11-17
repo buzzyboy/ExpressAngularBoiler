@@ -16,5 +16,8 @@
         {{registerForm.passwordConfirm.$error.compareTo}}
 
         <button ng-click="vm.register()" ng-disabled="registerForm.$invalid" class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+        <div ng-show="vm.formError">
+            <span class="text-danger">{{vm.formError}}</span>
+        </div>
     </form>
 </div>

@@ -6,7 +6,8 @@
 	"use strict";
 	
 	angular.module('Instafollowr', [
-		'ui.router'
+		'ui.router',
+		'ngStorage'
 	]);
 
 	angular

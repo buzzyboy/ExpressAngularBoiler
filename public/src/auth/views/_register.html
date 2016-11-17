@@ -2,13 +2,19 @@
     <form name="registerForm" class="form-register" novalidate>
         <h2 class="form-signin-heading">Register</h2>
         <label for="inputEmail" class="sr-only">Email address</label>
-        <input ng-model="vm.registerData.username" type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="" autocomplete="off">
+        <input ng-model="vm.registerData.username" type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="" autocomplete="off">
 
         <label for="inputPassword" class="sr-only">Password</label>
-        <input ng-model="vm.registerData.password" type="password" id="inputPassword" class="form-control" placeholder="Password" required="" autocomplete="off">
+        <input ng-model="vm.registerData.password" type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="" autocomplete="off">
 
         <label for="inputPassword" class="sr-only">Confirm</label>
-        <input ng-model="vm.registerData.passwordConfirm" type="password" id="inputPasswordConfirm" class="form-control" placeholder="Password" required="" autocomplete="off">
+        <input ng-model="vm.registerData.passwordConfirm" compare-to="vm.registerData.password" name="passwordConfirm" type="password" id="inputPasswordConfirm" class="form-control" placeholder="Password" required="" autocomplete="off">
+        <div ng-show="registerForm.passwordConfirm.$touched && (registerForm.passwordConfirm.$error.compareTo)">
+            <span class="text-danger" ng-show="registerForm.passwordConfirm.$error.compareTo">Passwords must match.</span>
+        </div>
+
+        {{registerForm.passwordConfirm.$error.compareTo}}
+
         <button ng-click="vm.register()" ng-disabled="registerForm.$invalid" class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
     </form>
 </div>

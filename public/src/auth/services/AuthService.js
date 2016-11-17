@@ -14,7 +14,8 @@
 	/* @ngInject */
 	function AuthService ($http, CONFIG) {
 		var service = {
-			login: login
+			login: login,
+			register: register
 		};
 		
 		return service;
@@ -26,6 +27,15 @@
 				username: username,
 				password: password
 			}).then(function (response) {
+				debugger;
+				return response;
+			}, function (error) {
+				debugger;
+			});
+		}
+
+		function register (registerModel) {
+			$http.post(CONFIG.apiServiceBaseUri + 'account/register', registerModel).then(function (response) {
 				debugger;
 				return response;
 			}, function (error) {

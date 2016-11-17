@@ -33,6 +33,11 @@
 
 		function register () {
 			var form = $scope.registerForm;
+			AuthService.register(vm.registerData).then(function (response) {
+
+			}, function (error) {
+
+			});
 			console.log(form);
 		}
 	}

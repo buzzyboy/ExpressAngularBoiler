@@ -9,10 +9,10 @@
 		.module('Instafollowr')
 		.controller('ApplicationController', ApplicationController);
 
-	ApplicationController.$inject = ['$rootScope', '$state', 'SessionService'];
+	ApplicationController.$inject = ['$rootScope', '$state', 'AuthService'];
 
 	/* @ngInject */
-	function ApplicationController ($rootScope, $state, SessionService) {
+	function ApplicationController ($rootScope, $state, AuthService) {
 		/* jshint validthis: true */
 		var app = this;
 
@@ -27,7 +27,7 @@
 		function activate () { }
 
 		function signOut () {
-			SessionService.destroy();
+			AuthService.logout();
 			$state.go('login');
 		}
 	}

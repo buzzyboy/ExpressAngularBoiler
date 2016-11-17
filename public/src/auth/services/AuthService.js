@@ -16,6 +16,7 @@
 		var service = {
 			login: login,
 			register: register,
+			logout: logout,
 			isAuthenticated: isAuthenticated
 		};
 		
@@ -38,6 +39,15 @@
 
 		function register (registerModel) {
 			return $http.post(CONFIG.apiServiceBaseUri + 'account/register', registerModel).then(function (response) {
+				return response;
+			}, function (response) {
+				return response.error;
+			});
+		}
+
+		function logout () {
+			SessionService.destroy();
+			return $http.get(CONFIG.apiServiceBaseUri + 'account/logout').then(function (response) {
 				return response;
 			}, function (response) {
 				return response.error;

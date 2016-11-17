@@ -2,10 +2,9 @@
     <form name="loginForm" class="form-signin" novalidate>
         <h2 class="form-signin-heading">Please sign in</h2>
         <label for="inputEmail" class="sr-only">Email address</label>
-        <input ng-model="vm.loginData.username" type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="" autocomplete="off">
-        <div ng-show="loginForm.$submitted || loginForm.password.$touched">
-            <span ng-show="loginForm.email.$error.required">Enter your email.</span>
-            <span ng-show="loginForm.email.$error.email">Please enter a valid email.</span>
+        <input ng-model="vm.loginData.username" type="text" name="username" minlength="4" maxlength="16" id="inputEmail" class="form-control" placeholder="Username" required="" autofocus="" autocomplete="off">
+        <div ng-show="loginForm.$submitted || loginForm.username.$touched">
+            <span ng-show="loginForm.username.$error.required">Enter your username.</span>
         </div>
 
         <label for="inputPassword" class="sr-only">Password</label>

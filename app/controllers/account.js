@@ -23,11 +23,13 @@ router.post('/register', function (req, res, next) {
 });
 
 router.post('/login', passport.authenticate('local'), function (req, res) {
-	res.json(req.user);
+	var model = Account.toModel(req.user);
+	res.json(model);
 });
 
 router.get('/me', function (req, res) {
-	res.json(req.user);
+	var model = Account.toModel(req.user);
+	res.json(model);
 });
 
 module.exports = router;

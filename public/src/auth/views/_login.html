@@ -1,4 +1,4 @@
-<div ng-controller="LoginController as vm">
+<div ng-controller="dLoginController as vm">
     <form name="loginForm" class="form-signin" novalidate>
         <h2 class="form-signin-heading">Please sign in</h2>
         <label for="inputEmail" class="sr-only">Email address</label>
@@ -10,9 +10,6 @@
 
         <label for="inputPassword" class="sr-only">Password</label>
         <input ng-model="vm.loginData.password" type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="" autocomplete="off" minlength="4" maxlength="16">
-        <div ng-show="loginForm.$submitted || loginForm.password.$error.minlength">
-            <span class="error" ng-show="loginForm.password.$error.minlength">Password must be at least 4 characters.</span>
-        </div>
         <button ng-click="vm.login()" ng-disabled="loginForm.$invalid" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     </form>
 </div>

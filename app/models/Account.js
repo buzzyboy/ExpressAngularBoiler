@@ -9,4 +9,11 @@ var Account = new Schema({
 
 Account.plugin(passportLocalMongoose);
 
+Account.statics.toModel = function (accountObject) {
+	return {
+		username: accountObject.username,
+		token: accountObject._id
+	};
+};
+
 module.exports = mongoose.model('Account', Account);

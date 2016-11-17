@@ -13,7 +13,11 @@
 	function loginPartial () {
 		return {
 			restrict: "AE",
-			templateUrl: "/src/auth/views/_login.html"
+			templateUrl: "/src/auth/views/_login.html",
+			scope: {
+				onLogin: "&",
+				onError: "&"
+			}
 		};
 	}
 })();

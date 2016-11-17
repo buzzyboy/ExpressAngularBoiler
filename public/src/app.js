@@ -9,22 +9,4 @@
 		'ui.router',
 		'ngStorage'
 	]);
-
-	angular
-		.module('Instafollowr')
-		.config(initRoutes);
-
-	initRoutes.$inject = ['$stateProvider', '$urlRouterProvider'];
-	function initRoutes ($stateProvider, $urlRouterProvider) {
-		$urlRouterProvider.otherwise('/home');
-		$stateProvider.state({
-			name: 'home',
-			url: '/home',
-			views: {
-				'main@': {
-					templateUrl: 'src/home/views/home.html'
-				}
-			}
-		});
-	}
 })();

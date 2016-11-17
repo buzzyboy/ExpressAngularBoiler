@@ -9,13 +9,14 @@
 		.module('Instafollowr')
 		.factory('AuthService', AuthService);
 	
-	AuthService.$inject = ['$http', '$q', 'CONFIG'];
+	AuthService.$inject = ['$http', 'CONFIG', 'SessionService'];
 	
 	/* @ngInject */
-	function AuthService ($http, $q, CONFIG) {
+	function AuthService ($http, CONFIG, SessionService) {
 		var service = {
 			login: login,
-			register: register
+			register: register,
+			isAuthenticated: isAuthenticated
 		};
 		
 		return service;
@@ -23,26 +24,28 @@
 		////////////////
 		
 		function login (username, password) {
-			$http.post(CONFIG.apiServiceBaseUri + 'account/login', {
+			return $http.post(CONFIG.apiServiceBaseUri + 'account/login', {
 				username: username,
 				password: password
 			}).then(function (response) {
-				if (response.data.error)
-				{
-					return $q.reject(response.error);
-				}
-				return response;
+				var token = response.data.token;
+				SessionService.create(token);
+				return response.data;
 			}, function (response) {
 				return response.error;
 			});
 		}
 
 		function register (registerModel) {
-			$http.post(CONFIG.apiServiceBaseUri + 'account/register', registerModel).then(function (response) {
+			return $http.post(CONFIG.apiServiceBaseUri + 'account/register', registerModel).then(function (response) {
 				return response;
 			}, function (response) {
 				return response.error;
 			});
+		}
+
+		function isAuthenticated () {
+			return SessionService.getSessionUser();
 		}
 	}
 })();

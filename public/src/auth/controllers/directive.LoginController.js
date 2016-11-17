@@ -7,12 +7,12 @@
 
 	angular
 		.module('Instafollowr')
-		.controller('LoginController', LoginController);
+		.controller('dLoginController', LoginController);
 
-	LoginController.$inject = ['AuthService'];
+	LoginController.$inject = ['$scope', 'AuthService'];
 
 	/* @ngInject */
-	function LoginController (AuthService) {
+	function LoginController ($scope, AuthService) {
 		/* jshint validthis: true */
 		var vm = this;
 
@@ -31,9 +31,10 @@
 		function activate () { }
 
 		function login () {
-			console.log("Login Data", vm.loginData);
-			AuthService.login(vm.loginData.username, vm.loginData.password).then(function (response) {}, function (error) {
-
+			AuthService.login(vm.loginData.username, vm.loginData.password).then(function (response) {
+				$scope.onLogin();
+			}, function (error) {
+				$scope.onError(error);
 			});
 		}
 	}

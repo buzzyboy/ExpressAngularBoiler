@@ -7,7 +7,7 @@
 
 	angular
 		.module('Instafollowr')
-		.controller('RegisterController', RegisterController);
+		.controller('dRegisterController', RegisterController);
 
 	RegisterController.$inject = ['$scope', 'AuthService'];
 

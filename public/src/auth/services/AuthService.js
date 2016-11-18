@@ -6,13 +6,13 @@
 	"use strict";
 	
 	angular
-		.module('Instafollowr')
+		.module(appName)
 		.factory('AuthService', AuthService);
 	
-	AuthService.$inject = ['$http', 'CONFIG', 'SessionService'];
+	AuthService.$inject = ['$http', '$q', 'CONFIG', 'SessionService'];
 	
 	/* @ngInject */
-	function AuthService ($http, CONFIG, SessionService) {
+	function AuthService ($http, $q, CONFIG, SessionService) {
 		var service = {
 			login: login,
 			register: register,
@@ -32,30 +32,35 @@
 				var token = response.data.token;
 				SessionService.create(token);
 				return response.data;
-			}, function (response) {
-				return response.error;
-			});
+			}, onHTTPPromiseFail);
 		}
 
 		function register (registerModel) {
 			return $http.post(CONFIG.apiServiceBaseUri + 'account/register', registerModel).then(function (response) {
-				return response;
-			}, function (response) {
-				return response.error;
-			});
+				return response.data;
+			}, onHTTPPromiseFail);
 		}
 
 		function logout () {
 			SessionService.destroy();
 			return $http.get(CONFIG.apiServiceBaseUri + 'account/logout').then(function (response) {
 				return response;
-			}, function (response) {
-				return response.error;
-			});
+			}, onHTTPPromiseFail);
 		}
 
 		function isAuthenticated () {
 			return SessionService.getSessionUser();
+		}
+
+		function onHTTPPromiseFail (response) {
+			if (response.data && response.data.message)
+			{
+				return $q.reject(response.data.message);
+			}
+			else
+			{
+				return $q.reject("Bad Request");
+			}
 		}
 	}
 })();

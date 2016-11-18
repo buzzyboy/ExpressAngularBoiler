@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular
-		.module('Instafollowr')
+		.module(appName)
 		.factory('AuthInterceptorService', AuthInterceptorService);
 
 	AuthInterceptorService.$inject = ['$rootScope', '$location', '$q', 'SessionService'];
@@ -20,7 +20,7 @@
 			config.headers = config.headers || {};
 			if (SessionService.exists())
 			{
-				config.headers.Authorization = 'Bearer ' + SessionService.getSession().accessToken;
+				config.headers.Authorization = SessionService.getSession().accessToken;
 			}
 
 			return config;
@@ -36,4 +36,14 @@
 			return $q.reject(rejection);
 		}
 	}
+
+	addInterceptors.$inject = ['$httpProvider'];
+
+	function addInterceptors($httpProvider) {
+		$httpProvider.interceptors.push('AuthInterceptorService');
+	}
+
+	angular
+		.module(appName)
+		.config(addInterceptors);
 })();

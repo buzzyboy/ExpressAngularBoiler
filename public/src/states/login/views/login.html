@@ -1,9 +1,12 @@
-<div ng-controller="LoginController as vm" class="container-fluid" style="background: pink; height: 100vh;">
+<div ng-controller="LoginController as vm" class="container-fluid">
 
     <div class="container">
         <div class="row">
             <div class="col-md-4">
                 <login-partial on-login="vm.onLoginSuccess()" on-error="vm.onLoginError()"></login-partial>
+                <p>
+                    Don't have an account? <a style="font-size: 125%" ui-sref="register">Create account</a>
+                </p>
             </div>
             <div class="col-md-8">
 

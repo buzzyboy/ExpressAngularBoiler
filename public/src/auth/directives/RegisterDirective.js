@@ -6,14 +6,18 @@
 	"use strict";
 
 	angular
-		.module('Instafollowr')
+		.module(appName)
 		.directive("registerPartial", loginPartial);
 
 	loginPartial.$inject = [];
 	function loginPartial () {
 		return {
 			restrict: "AE",
-			templateUrl: "/src/auth/views/_register.html"
+			templateUrl: "/src/auth/views/_register.html",
+			scope: {
+				onRegister: "&",
+				onError: "&"
+			}
 		};
 	}
 })();

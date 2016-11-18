@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular
-		.module('Instafollowr')
+		.module(appName)
 		.factory('SessionService', sessionService);
 
 	sessionService.$inject = ['$localStorage', '$rootScope'];
@@ -20,36 +20,32 @@
 		};
 		return service;
 
-		function getSessionUser() {
-		    var session = getSession();
-		    if (session !== undefined && session.hasOwnProperty('user'))
-		        return session.user;
-		    return null;
+		function getSessionUser () {
+			var session = getSession();
+			if (session !== undefined && session.hasOwnProperty('user'))
+				return session.user;
+			return null;
 		}
 
 		// implementation
 		/**
 		 * @param accessToken
-		 * @returns {{user: {id: string, userName: string, email: string, firstName: string, lastName: string, name: string, avatarUrl: string, phoneNumber: string, phoneNumberConfirmed: boolean}, accessToken: *}|*|null}
+		 * @returns {{user: AppUser, accessToken: *}|*|null}
 		 */
 		function create (accessToken) {
-		    self.session = {
-		        user: {
-		            id: '',
-		            userName: '',
-		            email: '',
-		            firstName: '',
-		            lastName: '',
-		            name: '',
-		            avatarUrl: '',
-		            phoneNumber: '',
-		            phoneNumberConfirmed: false
-		        },
-		        accessToken: accessToken
-		    };
+			self.session = {
+				user: {
+					id: '',
+					userName: '',
+					email: '',
+					firstName: '',
+					lastName: ''
+				},
+				accessToken: accessToken
+			};
 			$rootScope.isAuthenticated = true;
+			$rootScope.user = self.session.user;
 
-			// set cookie for signalR auth
 			$localStorage.session = self.session;
 			return self.session;
 		}

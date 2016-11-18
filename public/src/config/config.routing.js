@@ -6,7 +6,7 @@
 	"use strict";
 
 	angular
-		.module('Instafollowr')
+		.module(appName)
 		.config(initRoutes);
 
 	initRoutes.$inject = ['$stateProvider', '$urlRouterProvider'];
@@ -40,6 +40,18 @@
 				unauthenticated: unauthenticated
 			}
 		});
+		$stateProvider.state({
+			name: 'register',
+			url: '/register',
+			views: {
+				'main@': {
+					templateUrl: 'src/states/register/views/register.html'
+				}
+			},
+			resolve: {
+				unauthenticated: unauthenticated
+			}
+		});
 
 		authenticated.$inject = ['$q', '$timeout', '$state', 'AuthService'];
 		function authenticated ($q, $timeout, $state, AuthService) {
@@ -55,6 +67,7 @@
 				return $q.reject();
 			}
 		}
+
 		unauthenticated.$inject = ['$q', '$timeout', '$state', 'AuthService'];
 		function unauthenticated ($q, $timeout, $state, AuthService) {
 			if (!AuthService.isAuthenticated())

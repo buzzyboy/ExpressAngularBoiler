@@ -6,7 +6,7 @@
 	"use strict";
 
 	angular
-		.module('Instafollowr')
+		.module(appName)
 		.controller('dLoginController', LoginController);
 
 	LoginController.$inject = ['$scope', 'AuthService'];
@@ -16,25 +16,20 @@
 		/* jshint validthis: true */
 		var vm = this;
 
-		vm.activate = activate;
+		vm.errorMessage = null;
 		vm.loginData = {
 			username: "",
 			password: ""
 		};
 		vm.login = login;
-		vm.title = 'LoginController';
-
-		activate();
-
-		////////////////w
-
-		function activate () { }
 
 		function login () {
+			vm.errorMessage = "";
 			AuthService.login(vm.loginData.username, vm.loginData.password).then(function (response) {
 				$scope.onLogin();
 			}, function (error) {
-				$scope.onError(error);
+				vm.errorMessage = error;
+				$scope.onError();
 			});
 		}
 	}

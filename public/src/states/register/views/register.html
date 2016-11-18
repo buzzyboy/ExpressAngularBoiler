@@ -1,0 +1,14 @@
+<div class="container" ng-controller="RegisterController as vm">
+    <div class="container-fluid">
+
+        <div class="col-md-4">
+            <register-partial on-register="vm.onRegisterSuccess()"></register-partial>
+        </div>
+        <div class="col-md-8">
+
+            <div class="btn btn-default" ng-click="vm.onRegisterSuccess()">Test Button</div>
+
+        </div>
+
+    </div>
+</div>

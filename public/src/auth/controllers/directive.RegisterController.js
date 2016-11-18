@@ -6,7 +6,7 @@
 	"use strict";
 
 	angular
-		.module('Instafollowr')
+		.module(appName)
 		.controller('dRegisterController', RegisterController);
 
 	RegisterController.$inject = ['$scope', 'AuthService'];
@@ -16,7 +16,6 @@
 		/* jshint validthis: true */
 		var vm = this;
 
-		vm.activate = activate;
 		vm.register = register;
 		vm.registerData = {
 			username: "",
@@ -26,21 +25,18 @@
 		vm.formError = null;
 		vm.title = 'RegisterController';
 
-		activate();
-
-		////////////////
-
-		function activate () { }
-
 		function register () {
 			var form = $scope.registerForm;
 			vm.formError = null;
 			AuthService.register(vm.registerData).then(function (response) {
-
+				debugger;
+				var username = vm.registerData.username;
+				var password = vm.registerData.password;
+				$scope.onRegister(username, password);
 			}, function (errorMessage) {
 				vm.formError = errorMessage;
+				$scope.onError(errorMessage);
 			});
-			console.log(form);
 		}
 	}
 })();

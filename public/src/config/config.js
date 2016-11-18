@@ -6,7 +6,7 @@
 	"use strict";
 
 	angular
-		.module('Instafollowr')
+		.module(appName)
 		.constant("CONFIG", {
 			apiServiceBaseUri: "http://localhost:3000/api/"
 		});

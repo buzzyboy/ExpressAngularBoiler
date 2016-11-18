@@ -8,7 +8,7 @@ var config = require("../config/config.js");
 router.post('/register', function (req, res, next) {
 	if (!req.body.username || !req.body.password)
 	{
-		res.json({success: false, message: "Missing username or password."});
+		res.status(400).json({success: false, message: "Missing username or password."});
 	}
 	else
 	{
@@ -19,7 +19,8 @@ router.post('/register', function (req, res, next) {
 		newUser.save(function (err) {
 			if (err)
 			{
-				return res.json({success: false, message: "Username already exists."});
+				console.log("err", err);
+				return res.status(400).json({success: false, message: "Username already exists."});
 			}
 			res.json({success: true, message: "Successfully created new user"});
 		});
@@ -34,7 +35,7 @@ router.post('/login', function (req, res) {
 
 		if (!user)
 		{
-			res.send({success: false, msg: 'Authentication failed. User not found. Username: ' + req.body.username});
+			res.status(400).send({success: false, message: 'User not found'});
 		}
 		else
 		{
@@ -49,7 +50,7 @@ router.post('/login', function (req, res) {
 				}
 				else
 				{
-					res.send({success: false, msg: 'Authentication failed. Wrong password.'});
+					res.status(400).send({success: false, message: 'Authentication failed. Wrong password.'});
 				}
 			});
 		}
@@ -71,13 +72,13 @@ router.get('/me', passport.authenticate('jwt', { session: false}), function(req,
 			if (err) throw err;
 
 			if (!user) {
-				return res.status(403).send({success: false, msg: 'Authentication failed. User not found.'});
+				return res.status(403).send({success: false, message: 'Authentication failed. User not found.'});
 			} else {
-				res.json({success: true, msg: 'Welcome in the member area ' + user.username + '!'});
+				res.json({success: true, message: 'Welcome in the member area ' + user.username + '!'});
 			}
 		});
 	} else {
-		return res.status(403).send({success: false, msg: 'No token provided.'});
+		return res.status(403).send({success: false, message: 'No token provided.'});
 	}
 });
 
@@ -93,4 +94,5 @@ getToken = function (headers) {
 		return null;
 	}
 };
+
 module.exports = router;

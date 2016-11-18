@@ -6,7 +6,7 @@
 	"use strict";
 	
 	angular
-		.module('Instafollowr')
+		.module(appName)
 		.controller('LoginController', LoginController);
 	
 	LoginController.$inject = ['$state'];

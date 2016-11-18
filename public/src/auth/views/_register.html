@@ -1,23 +1,31 @@
 <div ng-controller="dRegisterController as vm">
     <form name="registerForm" class="form-register" novalidate>
         <h2 class="form-signin-heading">Register</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input ng-model="vm.registerData.username" type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="" autocomplete="off">
+        <label for="inputUsername" class="sr-only">Username</label>
+        <input input-error ng-model="vm.registerData.username" type="text" name="username" id="inputUsername" class="form-control" minlength="4" maxlength="16" placeholder="Username" required autofocus autocomplete="off">
+
+        <label for="inputEmail" class="sr-only">Email</label>
+        <input ng-model="vm.registerData.email" type="text" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus autocomplete="off">
+
+        <label for="inputFirstName" class="sr-only">Username</label>
+        <input ng-model="vm.registerData.firstName" type="text" name="firstName" id="inputFirstName" class="form-control" minlength="4" maxlength="16" placeholder="First Name" required autofocus autocomplete="off">
+
+        <label for="inputLastName" class="sr-only">Username</label>
+        <input ng-model="vm.registerData.lastName" type="text" name="lastName" id="inputLastName" class="form-control" minlength="4" maxlength="16" placeholder="Last Name" autofocus autocomplete="off">
 
         <label for="inputPassword" class="sr-only">Password</label>
         <input ng-model="vm.registerData.password" type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="" autocomplete="off">
 
         <label for="inputPassword" class="sr-only">Confirm</label>
-        <input ng-model="vm.registerData.passwordConfirm" compare-to="vm.registerData.password" name="passwordConfirm" type="password" id="inputPasswordConfirm" class="form-control" placeholder="Password" required="" autocomplete="off">
-        <div ng-show="registerForm.passwordConfirm.$touched && (registerForm.passwordConfirm.$error.compareTo)">
-            <span class="text-danger" ng-show="registerForm.passwordConfirm.$error.compareTo">Passwords must match.</span>
-        </div>
+        <input ng-model="vm.registerData.passwordConfirm" compare-to="vm.registerData.password" name="passwordConfirm" type="password" id="inputPasswordConfirm" class="form-control" placeholder="Confirm Password" required="" autocomplete="off">
 
-        {{registerForm.passwordConfirm.$error.compareTo}}
+        <form-errors></form-errors>
+
+        <!--{{registerForm.passwordConfirm.$error.compareTo}}-->
 
         <button ng-click="vm.register()" ng-disabled="registerForm.$invalid" class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
-        <div ng-show="vm.formError">
-            <span class="text-danger">{{vm.formError}}</span>
+        <div class="text-danger" ng-show="vm.formError">
+            {{vm.formError}}
         </div>
     </form>
 </div>

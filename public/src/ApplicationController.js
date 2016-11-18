@@ -6,7 +6,7 @@
 	"use strict";
 
 	angular
-		.module('Instafollowr')
+		.module(appName)
 		.controller('ApplicationController', ApplicationController);
 
 	ApplicationController.$inject = ['$rootScope', '$state', 'AuthService'];

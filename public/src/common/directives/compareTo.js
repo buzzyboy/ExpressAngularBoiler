@@ -6,7 +6,7 @@
 	"use strict";
 
 	angular
-		.module('Instafollowr')
+		.module(appName)
 		.directive('compareTo', compareTo);
 
 	compareTo.$inject = [];

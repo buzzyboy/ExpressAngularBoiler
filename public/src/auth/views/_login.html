@@ -2,15 +2,22 @@
     <form name="loginForm" class="form-signin" novalidate>
         <h2 class="form-signin-heading">Please sign in</h2>
         <label for="inputEmail" class="sr-only">Email address</label>
-        <input ng-model="vm.loginData.username" type="text" name="username" minlength="4" maxlength="16" id="inputEmail" class="form-control" placeholder="Username" required="" autofocus="" autocomplete="off">
-        <div ng-show="loginForm.$submitted || loginForm.username.$touched">
+        <input ng-model="vm.loginData.username" type="text" name="username" minlength="4" maxlength="16" id="inputEmail"
+               class="form-control" placeholder="Username" required="" autofocus="" autocomplete="off">
+        <div class="text-danger" ng-show="loginForm.$submitted || loginForm.username.$touched">
             <span ng-show="loginForm.username.$error.required">Enter your username.</span>
         </div>
 
         <label for="inputPassword" class="sr-only">Password</label>
-        <input ng-model="vm.loginData.password" type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="" autocomplete="off" minlength="4" maxlength="16">
-        <button ng-click="vm.login()" ng-disabled="loginForm.$invalid" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <input ng-model="vm.loginData.password" type="password" name="password" id="inputPassword" class="form-control"
+               placeholder="Password" required="" autocomplete="off">
+
+        <button ng-click="vm.login()" ng-disabled="loginForm.$invalid" class="btn btn-lg btn-primary btn-block"
+                type="submit">Sign in
+        </button>
+
+        <div ng-show="vm.errorMessage" class="text-danger">
+            {{vm.errorMessage}}
+        </div>
     </form>
 </div>
-
-<br><br>

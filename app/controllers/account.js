@@ -5,7 +5,7 @@ var passport = require('passport');
 var User = require('../models/User.js');
 var config = require("../config/config.js");
 
-router.post('/register', function (req, res, next) {
+router.post('/register', function (req, res) {
 	if (!req.body.username || !req.body.password)
 	{
 		res.status(400).json({success: false, message: "Missing username or password."});
@@ -62,37 +62,53 @@ router.get('/logout', function (req, res) {
 	res.send(true);
 });
 
-router.get('/me', passport.authenticate('jwt', { session: false}), function(req, res) {
+router.get('/me', passport.authenticate('jwt', {session: false}), function (req, res) {
 	var token = getToken(req.headers);
-	if (token) {
+	if (token)
+	{
 		var decoded = jwt.decode(token, config.secret);
 		User.findOne({
-			name: decoded.name
-		}, function(err, user) {
+			username: decoded.username
+		}, function (err, user) {
 			if (err) throw err;
 
-			if (!user) {
+			if (!user)
+			{
 				return res.status(403).send({success: false, message: 'Authentication failed. User not found.'});
-			} else {
+			}
+			else
+			{
 				res.json({success: true, user: user.toModel()});
 			}
 		});
-	} else {
+	}
+	else
+	{
 		return res.status(403).send({success: false, message: 'No token provided.'});
 	}
 });
 
-getToken = function (headers) {
-	if (headers && headers.authorization) {
+/**
+ * @param {{authorization:String}} headers
+ * @returns {String|null}
+ */
+function getToken (headers) {
+	if (headers && headers.authorization)
+	{
 		var parted = headers.authorization.split(' ');
-		if (parted.length === 2) {
+		if (parted.length === 2)
+		{
 			return parted[1];
-		} else {
+		}
+		else
+		{
 			return null;
 		}
-	} else {
+	}
+	else
+	{
 		return null;
 	}
-};
+}
 
 module.exports = router;

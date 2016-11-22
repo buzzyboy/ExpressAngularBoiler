@@ -29,13 +29,10 @@
 			var form = $scope.registerForm;
 			vm.formError = null;
 			AuthService.register(vm.registerData).then(function (response) {
-				debugger;
-				var username = vm.registerData.username;
-				var password = vm.registerData.password;
-				$scope.onRegister(username, password);
+				$scope.onRegister();
 			}, function (errorMessage) {
 				vm.formError = errorMessage;
-				$scope.onError(errorMessage);
+				$scope.onError();
 			});
 		}
 	}

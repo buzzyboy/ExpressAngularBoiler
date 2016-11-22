@@ -42,6 +42,7 @@
 		 */
 		function create (accessToken) {
 			self.session = {
+				/**@type {AppUser}*/
 				user: {
 					id: '',
 					username: ''

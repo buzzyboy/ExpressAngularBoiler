@@ -11,7 +11,7 @@
 
 	initRoutes.$inject = ['$stateProvider', '$urlRouterProvider'];
 	function initRoutes ($stateProvider, $urlRouterProvider) {
-		$urlRouterProvider.otherwise('/home');
+		$urlRouterProvider.otherwise('/login');
 		$stateProvider.state({
 			name: 'home',
 			url: '/home',
@@ -53,17 +53,15 @@
 			}
 		});
 
-		authenticated.$inject = ['$q', '$timeout', '$state', 'AuthService'];
-		function authenticated ($q, $timeout, $state, AuthService) {
+		authenticated.$inject = ['$q', '$state', 'AuthService'];
+		function authenticated ($q, $state, AuthService) {
 			if (AuthService.isAuthenticated())
 			{
 				return $q.when();
 			}
 			else
 			{
-				$timeout(function () {
-					$state.go('login');
-				});
+				$state.go('login');
 				return $q.reject();
 			}
 		}

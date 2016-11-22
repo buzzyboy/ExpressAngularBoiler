@@ -1,4 +1,4 @@
 # Quick Start Guide
 
-> npm install
-> node app
+    npm install
+    node app

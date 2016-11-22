@@ -1,6 +1,7 @@
 {
   "name": "PrototypeExpressAngular",
   "version": "0.0.0",
+  "repository": "https://github.com/buzzyboy/ExpressAngularBoiler",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
@@ -23,6 +24,8 @@
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-exec": "^1.0.1",
     "mongodb": "^2.2.11",
     "mongoose": "^4.6.8"
   }

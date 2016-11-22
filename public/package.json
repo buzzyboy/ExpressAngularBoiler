@@ -1,6 +1,9 @@
 {
   "name": "ExpressAngularPrototype",
   "version": "0.0.1",
+  "description": "Site for Prototype",
+  "license": "MIT",
+  "repository": "https://github.com/buzzyboy/ExpressAngularBoiler",
   "devDependencies": {
     "angular": "^1.5.8",
     "angular-ui-router": "*",

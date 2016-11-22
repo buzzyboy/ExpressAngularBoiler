@@ -17,6 +17,13 @@ var UserSchema = new Schema({
 	}
 });
 
+UserSchema.methods.toModel = function () {
+	return {
+		username: this.username,
+		id: this._id
+	};
+};
+
 UserSchema.pre('save', function (next) {
 	var user = this;
 	if (this.isModified('password') || this.isNew) {

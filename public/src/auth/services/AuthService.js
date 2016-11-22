@@ -17,7 +17,8 @@
 			login: login,
 			register: register,
 			logout: logout,
-			isAuthenticated: isAuthenticated
+			isAuthenticated: isAuthenticated,
+			getMe: getMe
 		};
 		
 		return service;
@@ -31,6 +32,7 @@
 			}).then(function (response) {
 				var token = response.data.token;
 				SessionService.create(token);
+				getMe();
 				return response.data;
 			}, onHTTPPromiseFail);
 		}
@@ -50,6 +52,16 @@
 
 		function isAuthenticated () {
 			return SessionService.getSessionUser();
+		}
+
+		function getMe () {
+			return $http.get(CONFIG.apiServiceBaseUri + 'account/me').then(function (response) {
+				if (response.data.success)
+				{
+					var user = response.data.user;
+					SessionService.updateSessionUser(user);
+				}
+			}, onHTTPPromiseFail);
 		}
 
 		function onHTTPPromiseFail (response) {

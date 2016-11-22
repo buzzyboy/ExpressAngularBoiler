@@ -16,8 +16,16 @@
 			exists: exists,
 			getSession: getSession,
 			getSessionUser: getSessionUser,
-			getParameterByName: getParameterByName
+			getParameterByName: getParameterByName,
+			updateSessionUser: updateSessionUser
 		};
+
+		if ($localStorage.session)
+		{
+			var user = $localStorage.session.user;
+			$rootScope.user = user;
+		}
+
 		return service;
 
 		function getSessionUser () {
@@ -36,10 +44,7 @@
 			self.session = {
 				user: {
 					id: '',
-					userName: '',
-					email: '',
-					firstName: '',
-					lastName: ''
+					username: ''
 				},
 				accessToken: accessToken
 			};
@@ -82,6 +87,13 @@
 			var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
 				results = regex.exec(location.href);
 			return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+		}
+
+		/**
+		 * @param {AppUser} user
+		 */
+		function updateSessionUser (user) {
+			$.extend($localStorage.session.user, user);
 		}
 	}
 })();

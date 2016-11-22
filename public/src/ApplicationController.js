@@ -24,7 +24,12 @@
 
 		////////////////
 
-		function activate () { }
+		function activate () {
+			if (AuthService.isAuthenticated())
+			{
+				AuthService.getMe();
+			}
+		}
 
 		function signOut () {
 			AuthService.logout();

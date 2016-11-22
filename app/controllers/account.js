@@ -74,7 +74,7 @@ router.get('/me', passport.authenticate('jwt', { session: false}), function(req,
 			if (!user) {
 				return res.status(403).send({success: false, message: 'Authentication failed. User not found.'});
 			} else {
-				res.json({success: true, message: 'Welcome in the member area ' + user.username + '!'});
+				res.json({success: true, user: user.toModel()});
 			}
 		});
 	} else {
